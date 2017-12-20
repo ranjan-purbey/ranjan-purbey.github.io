@@ -3,14 +3,13 @@ var G = {
     canvas: null,
     context: null,
     cellSize: null,
-    scale: 1,
     rows: 6,
     cols: 4,
     fgColor: ['#f33', '#3f3'],
     bgColor: '#222',
     board: null,
     count: null,
-    gameOver: false,
+    gameOver: null,
 }
 G.cell = function(){
     this.value = 0;
@@ -23,6 +22,7 @@ G.init = function(){
     G.board = new Array(G.rows).fill().map(()=>new Array(G.cols).fill().map(() => new G.cell()));
     G.turn = true;
     G.count = [0, 0];
+    G.gameOver = false;
     G.resize();
     G.canvas.addEventListener('click', G.input);
     window.addEventListener('resize', G.resize);
@@ -38,8 +38,8 @@ G.resize = function(){
 G.loop = function(){
     //~ G.update();
     G.render();
-    if(!G.gameOver)window.requestAnimationFrame(G.loop);
-    else G.canvas.removeEventListener('click', G.input);
+    window.requestAnimationFrame(G.loop);
+    if(G.gameOver)G.canvas.removeEventListener('click', G.input);
 }
 G.input = function(e){
     var row = ~~((e.clientY-G.canvas.offsetTop)/G.cellSize);
