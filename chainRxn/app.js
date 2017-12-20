@@ -5,8 +5,8 @@ var G = {
     cellSize: null,
     rows: 6,
     cols: 4,
-    fgColor: ['#f33', '#3f3'],
-    bgColor: '#222',
+    fgColor: ['#ff3333', '#33ff33'],
+    bgColor: '#222222',
     board: null,
     count: null,
     gameOver: null,
@@ -23,6 +23,7 @@ G.init = function(){
     G.turn = true;
     G.count = [0, 0];
     G.gameOver = false;
+    document.querySelectorAll("input[type=color]").forEach((el, index)=>{el.value = G.fgColor[~~!index];})
     G.resize();
     G.canvas.addEventListener('click', G.input);
     window.addEventListener('resize', G.resize);
@@ -128,13 +129,13 @@ G.Draw.gameOver = function(){
     //~ G.context.fillRect(0, 0, G.cellSize*G.cols, G.cellSize*G.rows);
     //~ G.context.strokeStyle = G.bgColor;
     G.context.strokeStyle = G.fgColor[~~G.turn];
-    G.context.font = "20px serif";
-    G.context.translate(G.cellSize, G.cellSize*G.rows*0.5);
+    G.context.font = G.cellSize*.5+"px serif";
+    G.context.translate(G.cellSize*.5, G.cellSize*G.rows*0.6);
     G.context.rotate(-Math.PI*.17);
     G.context.strokeText("Player "+(1+~~!G.turn)+" Won!", 0, 0);
     G.context.rotate(Math.PI*.17);
-    G.context.translate(-G.cellSize, -G.cellSize*G.rows*0.5);
+    G.context.translate(-G.cellSize*.5, -G.cellSize*G.rows*0.6);
     
 }
-
+G.setColor = function(player, val){G.fgColor[~~!player] = val;}
 G.init();

@@ -8,8 +8,14 @@
         <div style="text-align:center">
             <canvas height="300" width="300" id="main">
                 Your browser doesn't support HTML5 canvas. Get a better one.
-            </canvas>
-            <input type="button" value="Replay &#x27f3;" onclick = "G.init()" />
+            </canvas><br/>
+            <span>
+                P1 <input type="color" onchange="G.setColor(0, this.value)" onload="alert()" />
+            </span>
+            <input value="⟳" onclick="G.init()" style="background:rgba(0,100,200,0.7); border:solid 1px rgb(0,100,200); border-radius:.5em; font-size:2em;color: white;" type="button">
+            <span>
+                <input type="color" onchange="G.setColor(1, this.value)" /> P2
+            </span>
         </div>
         <script src="app.js">
         </script>
